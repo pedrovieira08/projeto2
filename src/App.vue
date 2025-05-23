@@ -1,5 +1,62 @@
 <script setup>
-
+const books = [
+  {
+    id: 1,
+    title: 'Comigo na livraria',
+    cover: '/covers/comigo-na-livraria.png',
+    price: 23.24,
+    author: 'Martha Medeiros',
+  },
+  {
+    id: 2,
+    title: 'Quincas Borba',
+    cover: '/covers/quincas-borba.png',
+    price: 23.24,
+    author: 'Machado de Assis',
+  },
+  {
+    id: 3,
+    title: 'A livraria',
+    cover: '/covers/a-livraria.png',
+    price: 13.94,
+    author: 'Penelope Fitzgerald',
+  },
+  {
+    id: 4,
+    title: 'A hora da estrela',
+    cover: '/covers/a-hora-da-estrela.png',
+    price: 16.84,
+    author: 'Clarice Lispector',
+  },
+  {
+    id: 5,
+    title: 'O alienista',
+    cover: '/covers/o-alienista.png',
+    price: 266.92,
+    author: 'Machado de Assis',
+  },
+  {
+    id: 6,
+    title: 'Mar morto',
+    cover: '/covers/mar-morto.png',
+    price: 13.95,
+    author: 'Jorge Amado',
+  },
+  {
+    id: 7,
+    title: 'Grande sertão',
+    cover: '/covers/grande-sertao-veredas.png',
+    price: 26.04,
+    author: 'Guimarães Rosa',
+  },
+  {
+    id: 8,
+    title: 'Flor de poemas',
+    cover: '/covers/flor-de-poema.png',
+    price: 15.81,
+    author: 'Cecília Meireles',
+  },
+];
 </script>
 
 <template>
@@ -64,7 +121,20 @@
         </div>
     </section>
 </main>
+<section class="books">
+  <article class="book" v-for="book in books" :key="book.id">
+    <img :src="book.cover" :alt="book.title" />
+    <h2>{{ book.title }}</h2>
+    <p class="book-author">{{ book.author }}</p>
+    <span class="price-and-like">
+      <p class="book-price">R$ {{ book.price.toFixed(2) }}</p>
+      <span class="mdi mdi-heart-outline"></span>
+    </span>
+    <button><span class="mdi mdi-cart"></span>Comprar</button>
+  </article>
+</section>
 </template>
+
 <style scoped>
 header nav {
   display: flex;
@@ -241,6 +311,44 @@ button {
   & article:nth-child(2) {
     border-left: 1px solid #27ae6099;
     border-right: 1px solid #27ae6099;
+  }
+}
+.books {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  padding: 5vh 8vw;
+
+  & .book {
+    display: flex;
+    flex-direction: column;
+    min-width: 300px;
+    width: calc(100% / 4 - 42px);
+    margin: 20px;
+
+    & h2 {
+      font-size: 1.5rem;
+      font-weight: 700;
+    }
+
+    & .book-author {
+      font-size: 1rem;
+    }
+
+    & .book-price {
+      font-size: 1.2rem;
+      font-weight: 700;
+    }
+
+    & .price-and-like {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 20px;
+
+      & .mdi-heart-outline {
+        font-size: 1.3rem;
+        color: #27ae60;
+      }
+    }
   }
 }
 </style>
